@@ -2,6 +2,7 @@ package kq
 
 import (
 	"context"
+	"crypto/tls"
 	"io"
 	"log"
 	"time"
@@ -135,6 +136,7 @@ func newKafkaQueue(c KqConf, handler ConsumeHandler, options queueOptions) queue
 				Timeout:       10 * time.Second,
 				DualStack:     true,
 				SASLMechanism: mechanism,
+				TLS:           &tls.Config{},
 			}
 		} else {
 			// 使用SASL PLAIN认证
