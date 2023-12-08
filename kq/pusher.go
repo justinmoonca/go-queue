@@ -2,6 +2,7 @@ package kq
 
 import (
 	"context"
+	"crypto/tls"
 	"strconv"
 	"time"
 
@@ -68,6 +69,7 @@ func NewPusher(config KqConf, opts ...PushOption) *Pusher {
 			// application.
 			sharedTransport := &kafka.Transport{
 				SASL: mechanism,
+				TLS:  &tls.Config{},
 			}
 
 			producer = &kafka.Writer{
